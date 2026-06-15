@@ -5,5 +5,19 @@
       "Bash(python -m pytest:*)",
       "Read(./vendor/odoo/**)"
     ]
+  },
+  "plugins": {
+    "letzdoo-marketplace": {
+      "url": "https://github.com/letzdoo/claude-marketplace.git"
+    },
+    "odoo-development": {
+      "marketplace": "letzdoo-marketplace"
+    },
+    "odoo-query": {
+      "marketplace": "letzdoo-marketplace"
+    },
+    "odoo-token-killer": {
+      "marketplace": "letzdoo-marketplace"
+    }
   }
 }
