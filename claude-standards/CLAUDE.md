@@ -60,11 +60,20 @@ mi_modulo/
 
 1. **Explorar** — leer el módulo afectado + el fuente de la versión fijada. Sin código aún.
 2. **Planificar** — usar *plan mode* para todo lo que toque modelos/campos/migraciones.
-3. **Implementar** — diff mínimo, respetando `_inherit` y la sintaxis de la versión.
-4. **Verificar** — correr el subagente `odoo-version-auditor` y los tests antes del PR.
+3.  Implementar — diff mínimo, respetando `_inherit` y la sintaxis de la versión.
+4.  Verificar — correr el subagente `odoo-version-auditor` y los tests antes del PR.
 
 ## 7. Soporte (tickets sobre sistemas en vivo)
 
 - Reproducir **antes** de tocar: test que falle o pasos de repro documentados.
 - Confirmar la versión del cliente al inicio. Aplicar guardrails de esa versión.
 - Si cambia el esquema → script de migración de datos en `migrations/`.
+
+## 8. Enterprise Multi-Company/Website
+
+- **`company_id` Obligatorio:** Todo modelo con datos específicos de compañía debe tener un campo `company_id`.
+- **Definición del campo:** `company_id = fields.Many2one('res.company', string='Company', required=True, index=True, default=lambda self: self.env.company)`.
+- **Consistencia Relacional:** Activar `_check_company_auto = True` en el modelo y `check_company=True` en campos relacionales (Many2one, Many2many) para evitar contaminación entre compañías.
+- **Gestión de Contexto:** Usar `self.env.company` para la compañía activa y `self.env.companies` para las seleccionadas. Usar `with_company(company)` para cambios de contexto de forma segura.
+- **Seguridad:** Validar siempre las `record rules` en entornos multi-compañía para asegurar el aislamiento de datos.
+
