@@ -37,3 +37,8 @@ git init -q
 git submodule add -q -b "$ODOO" https://github.com/odoo/odoo.git vendor/odoo || \
   echo "NOTA: añade manualmente el submódulo de Odoo $ODOO en vendor/odoo"
 echo "Repo de cliente listo en: $DEST (Odoo $ODOO)"
+
+echo ""
+echo "=== Plugins Listos ==="
+echo "El entorno Claude Code está preconfigurado con plugins de Odoo."
+echo "Ejecuta 'claude' en el directorio del cliente para finalizar su instalación."
