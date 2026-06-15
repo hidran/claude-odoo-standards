@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_acme" model="ir.ui.view">
+        <field name="name">sale.order.form.acme</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="acme_priority"/>
+                <!-- 17+: inline, NO attrs -->
+                <field name="acme_express_count" invisible="acme_priority == 'low'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "odoo-docs-19": {
+      "type": "stdio",
+      "command": "odoo-docs-mcp",
+      "args": ["--version", "19.0"]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pre-commit:*)",
+      "Bash(python -m pytest:*)",
+      "Read(./vendor/odoo/**)"
+    ]
+  },
+  "env": { "ODOO_TEST_TAGS": "post_install,-at_install" }
+}

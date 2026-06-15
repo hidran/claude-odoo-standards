@@ -1,0 +1,4 @@
+{
+  "//": "Copia a settings.local.json (gitignored). Rutas/preferencias personales.",
+  "env": { "ODOO_ADDONS_PATH": "/home/yo/odoo/addons" }
+}
