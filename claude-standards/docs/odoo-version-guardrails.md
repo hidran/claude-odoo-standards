@@ -58,6 +58,22 @@ Desde v18 existe `odoo-bin upgrade_code` para automatizar parte del salto (p.ej.
 
 > Revisa siempre el resultado a mano: el script puede colocar atributos fuera del tag.
 
+## Enterprise & Multi-Company / Website
+
+- **Multi-Website:** En modelos con soporte de sitio web, usar `website_id` para filtrado y `website_published` para visibilidad.
+- **Record Rules (v17+):** El estándar para reglas multi-compañía ahora debe usar `company_ids` (plural) para soportar la selección múltiple de la UI.
+- **Template de Regla:**
+
+```xml
+<record id="rule_id" model="ir.rule">
+    <field name="name">Rule Name: multi-company</field>
+    <field name="model_id" ref="model_name"/>
+    <field name="domain_force">
+        ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+    </field>
+</record>
+```
+
 ## Regla operativa para Claude
 
 1. Lee el `🔒 VERSION LOCK` del repo.
