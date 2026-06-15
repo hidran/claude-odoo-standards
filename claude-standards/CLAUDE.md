@@ -77,3 +77,11 @@ mi_modulo/
 - **Gestión de Contexto:** Usar `self.env.company` para la compañía activa y `self.env.companies` para las seleccionadas. Usar `with_company(company)` para cambios de contexto de forma segura.
 - **Seguridad:** Validar siempre las `record rules` en entornos multi-compañía para asegurar el aislamiento de datos.
 
+## 9. Herramientas y Plugins (Letzdoo Marketplace)
+
+Este entorno integra plugins avanzados para Claude Code:
+- **`odoo-development`**: Comandos como `/odoo-module`, `/odoo-review`, `/odoo-security`.
+- **`odoo-query`**: Usa `/odoo-query` para consultas XML-RPC de solo lectura contra instancias en vivo.
+- **`odoo-token-killer`**: Optimiza el uso de tokens resumiendo logs largos.
+
+Los plugins se instalan automáticamente al inicializar un nuevo proyecto y ejecutar `claude`.
