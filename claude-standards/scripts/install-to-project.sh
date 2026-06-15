@@ -54,9 +54,30 @@ setup_commands() {
     done
 }
 
-# Ejecutar configuración
-setup_claude_md
-setup_agents
-setup_commands
+# Menú interactivo
+echo "=== Instalador de Estándares Claude ==="
+PS3='Selecciona una opción: '
+options=("Configurar CLAUDE.md" "Enlazar Agentes y Comandos" "Todo" "Salir")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Configurar CLAUDE.md")
+            setup_claude_md
+            ;;
+        "Enlazar Agentes y Comandos")
+            setup_agents
+            setup_commands
+            ;;
+        "Todo")
+            setup_claude_md
+            setup_agents
+            setup_commands
+            ;;
+        "Salir")
+            break
+            ;;
+        *) echo "Opción inválida $REPLY";;
+    esac
+done
 
 echo "Instalación completada correctamente."
