@@ -34,5 +34,15 @@ Código generado, validado contra el fuente real de ESA versión
 2. Cada dev clona este repo y corre `scripts/sync-standards.sh` para enlazar commands/agents a `~/.claude/`.
 3. Para un cliente nuevo: `scripts/init-odoo-project.sh --client=ACME --odoo=19.0`.
 
+## Integración en proyectos existentes
+
+Si ya tienes un proyecto Odoo y quieres adoptar estos estándares:
+
+1. Clona este repo dentro de tu proyecto:
+   `git clone https://github.com/hidran/claude-odoo-standards claude-standards`
+2. Ejecuta el instalador interactivo:
+   `./claude-standards/scripts/install-to-project.sh`
+3. Sigue las instrucciones para enlazar agentes y configurar tu `CLAUDE.md`.
+
 > Verifica siempre claves y precedencia exactas en la doc oficial vigente:
 > https://code.claude.com/docs/en/settings — cambian entre versiones de Claude Code.
