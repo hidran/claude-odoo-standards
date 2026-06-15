@@ -35,3 +35,28 @@ $import_line\\
         echo "CLAUDE.md ya contiene la importación."
     fi
 }
+
+setup_agents() {
+    mkdir -p "$PROJECT_ROOT/.claude/agents"
+    echo "Enlazando agentes..."
+    for agent in "$STD_DIR/.claude/agents"/*.md; do
+        [ -e "$agent" ] || continue
+        ln -sfn "../../$STD_REL_PATH/.claude/agents/$(basename "$agent")" "$PROJECT_ROOT/.claude/agents/"
+    done
+}
+
+setup_commands() {
+    mkdir -p "$PROJECT_ROOT/.claude/commands"
+    echo "Enlazando comandos..."
+    for cmd in "$STD_DIR/.claude/commands"/*.md; do
+        [ -e "$cmd" ] || continue
+        ln -sfn "../../$STD_REL_PATH/.claude/commands/$(basename "$cmd")" "$PROJECT_ROOT/.claude/commands/"
+    done
+}
+
+# Ejecutar configuración
+setup_claude_md
+setup_agents
+setup_commands
+
+echo "Instalación completada correctamente."
