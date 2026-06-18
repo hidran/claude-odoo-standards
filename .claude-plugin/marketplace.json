@@ -1,0 +1,42 @@
+{
+  "name": "claude-odoo-standards",
+  "owner": {
+    "name": "[Empresa]",
+    "url": "https://github.com/hidran/claude-odoo-standards"
+  },
+  "metadata": {
+    "description": "Marketplace privado de la empresa: estandar Odoo + plugins curados de terceros.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "odoo-standards",
+      "source": "./plugins/odoo-standards",
+      "description": "Estandar de ingenieria Odoo agnostico de version (skills, commands, agents, hooks)."
+    },
+    {
+      "name": "odoo-development",
+      "source": {
+        "source": "github",
+        "repo": "letzdoo/odoo-development"
+      },
+      "description": "Letzdoo: comandos /odoo-module, /odoo-review, /odoo-security. CONFIRMAR repo real antes de usar."
+    },
+    {
+      "name": "odoo-query",
+      "source": {
+        "source": "github",
+        "repo": "letzdoo/odoo-query"
+      },
+      "description": "Letzdoo: /odoo-query para consultas XML-RPC de solo lectura. CONFIRMAR repo real antes de usar."
+    },
+    {
+      "name": "odoo-token-killer",
+      "source": {
+        "source": "github",
+        "repo": "letzdoo/odoo-token-killer"
+      },
+      "description": "Letzdoo: optimiza tokens resumiendo logs largos. CONFIRMAR repo real antes de usar."
+    }
+  ]
+}

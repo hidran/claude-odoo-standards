@@ -3,19 +3,14 @@
     "allow": [
       "Bash(pre-commit:*)",
       "Bash(python -m pytest:*)",
-      "Bash(git status)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)"
+      "Read(./vendor/odoo/**)"
     ]
-  },
-  "env": {
-    "ODOO_TEST_TAGS": "post_install,-at_install"
   },
   "extraKnownMarketplaces": {
     "claude-odoo-standards": {
       "source": {
-        "source": "directory",
-        "path": "."
+        "source": "github",
+        "repo": "{{MARKETPLACE}}"
       }
     }
   },

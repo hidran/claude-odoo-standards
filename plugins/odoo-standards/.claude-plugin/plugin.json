@@ -1,0 +1,10 @@
+{
+  "name": "odoo-standards",
+  "version": "1.0.0",
+  "description": "Estandar de ingenieria Odoo agnostico de version: skills, commands, agents y hooks para shops multi-version (v14 -> v19). El VERSION LOCK del repo selecciona la columna a aplicar.",
+  "author": {
+    "name": "[Empresa]"
+  },
+  "homepage": "https://github.com/hidran/claude-odoo-standards",
+  "keywords": ["odoo", "erp", "python", "standards", "multi-version"]
+}

@@ -1,9 +1,11 @@
 # acme-erp-odoo19 (repo de cliente — EJEMPLO)
 
-Repo de cliente de ejemplo que **consume el estándar de empresa** (`../claude-standards`)
-y fija Odoo **19.0**. Demuestra el patrón "estándar + VERSION LOCK".
+Repo de cliente de ejemplo que **consume el estándar de empresa vía el plugin
+`odoo-standards`** (marketplace privado) y fija Odoo **19.0**. Demuestra el patrón
+"plugin + VERSION LOCK".
 
-- `CLAUDE.md` → importa el estándar y añade el candado de versión 19.0.
+- `CLAUDE.md` → solo el candado de versión 19.0 y quirks; el estándar llega del plugin.
+- `.claude/settings.json` → enrola el marketplace y habilita el plugin.
 - `addons/acme_sales/` → módulo de ejemplo, **sintaxis correcta de Odoo 19**:
   - `<list>` como tag raíz (no `<tree>`)
   - atributos inline `invisible=` / `readonly=` (no `attrs`)
@@ -14,8 +16,8 @@ y fija Odoo **19.0**. Demuestra el patrón "estándar + VERSION LOCK".
 ## Estructura
 ```
 acme-erp-odoo19/
-├── CLAUDE.md                 # overlay con 🔒 VERSION LOCK 19.0
-├── .claude/settings.json
+├── CLAUDE.md                 # 🔒 VERSION LOCK 19.0 + quirks
+├── .claude/settings.json     # enrola marketplace + plugin odoo-standards
 ├── .gitmodules               # vendor/odoo @ 19.0 (fuente de verdad)
 └── addons/acme_sales/
     ├── __manifest__.py        # version 19.0.1.0.0
@@ -26,8 +28,8 @@ acme-erp-odoo19/
     └── tests/test_acme_sample.py
 ```
 
-## Cómo se generó (desde claude-standards)
+## Cómo se generó (desde el repo de estándares)
 ```bash
-cd claude-standards
+cd claude-odoo-standards
 ./scripts/init-odoo-project.sh --client=ACME --odoo=19.0 --python=3.12 --deploy="odoo.sh (production)"
 ```

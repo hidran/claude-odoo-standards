@@ -6,8 +6,11 @@
 
 ## Fase 1 — Estandarización (semanas 5-8)
 - Mover a **Team Premium** (mín. 5 asientos, incluye Claude Code) + consola de admin.
-- Publicar este repo `claude-standards`. Cada dev corre `scripts/sync-standards.sh`.
-- IT despliega `managed/` (piso de seguridad e IP).
+- Publicar este repo como **marketplace** (`/plugin marketplace add tu-org/claude-odoo-standards`).
+  Cada dev instala el plugin `odoo-standards` (o lo recibe auto-enrolado vía el
+  `.claude/settings.json` del repo de cliente).
+- IT despliega `managed/` (piso de seguridad e IP); opcionalmente fija el marketplace y
+  `enabledPlugins` en managed-settings para enrolamiento forzado.
 
 ## Fase 2 — Enforcement y escala
 - Pasar a **Enterprise** cuando se necesite: managed-settings obligatorio, SSO/SCIM,

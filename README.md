@@ -1,37 +1,60 @@
-# Ejemplo: estándar de empresa + repo de cliente (Odoo 19)
+# Estándar Odoo como plugin de Claude Code (marketplace privado)
 
-Dos repos que muestran cómo organizar Claude Code en un shop Odoo multi-versión.
+Muestra cómo una consultora Odoo multi-versión centraliza su estándar de ingeniería con
+el modelo nativo de Claude Code: **un plugin versionado servido desde un marketplace
+privado**, en vez de symlinks o `@import`.
 
 ```
-odoo-claude-example/
-├── claude-standards/      # 1) Estándar EMPRESARIAL (fuente de verdad, agnóstico de versión)
-└── acme-erp-odoo19/       # 2) Repo de CLIENTE de ejemplo, fija Odoo 19.0 e importa el estándar
+claude-odoo-standards/            # marketplace (este repo)
+├── .claude-plugin/marketplace.json
+├── plugins/odoo-standards/       # el plugin: skills, commands, agents, hooks
+├── scaffold/ + scripts/          # generador de repos de cliente thin
+└── acme-erp-odoo19/              # repo de CLIENTE de ejemplo (Odoo 19)
 ```
 
-## 1) claude-standards (empresa)
-Política de seguridad NO sobrescribible (`managed/`), estándar de ingeniería (`CLAUDE.md`),
-slash commands y subagentes compartidos, hooks, la **matriz de versiones v14→v19**
-(`docs/odoo-version-guardrails.md`), y el scaffolder de repos nuevos (`scripts/`).
+> En producción serían **dos repos** en tu organización: `tu-org/claude-odoo-standards`
+> (este) y `tu-org/acme-erp-odoo19`. Aquí van juntos solo para el ejemplo.
 
-## 2) acme-erp-odoo19 (cliente / usuario)
-Importa el estándar y añade su **🔒 VERSION LOCK 19.0**. El módulo `acme_sales` usa la
-sintaxis CORRECTA de Odoo 19: `<list>`, atributos inline, `_compute_display_name()`,
-`from odoo import Command`, `view_mode="list,form"`.
+## El plugin `odoo-standards`
 
-## En la práctica (GitHub)
-Serían **dos repos separados** en tu organización de GitHub:
-`tu-org/claude-standards` y `tu-org/acme-erp-odoo19`. El segundo trae el primero como
-submódulo (o por path en monorepo). Para subirlos:
+Entrega el estándar de empresa de forma nativa:
+
+- **Skills** — `odoo-engineering-standard` (reglas de oro, SOLID/seguridad),
+  `odoo-version-guardrails` (matriz v14→v19; aplica solo la columna del VERSION LOCK),
+  `verify-multi-company`.
+- **Commands** — `/new-module`, `/migrate-check`, `/fix-ticket`, `/gen-i18n`.
+- **Agents** — `odoo-version-auditor`, `odoo-security-reviewer`, `odoo-enterprise-auditor`.
+- **Hooks** — guard de secretos (PreToolUse) y lint Odoo (PostToolUse).
+
+## Cómo se usa
+
+**Repo existente** (opt-in manual, una vez):
 
 ```bash
-# repo de estándares
-cd claude-standards && git init && git add . && git commit -m "init: estándar de empresa"
-gh repo create tu-org/claude-standards --private --source=. --push
-
-# repo de cliente
-cd ../acme-erp-odoo19 && git init && git add . && git commit -m "init: ACME Odoo 19"
-gh repo create tu-org/acme-erp-odoo19 --private --source=. --push
+/plugin marketplace add hidran/claude-odoo-standards
+/plugin install odoo-standards@claude-odoo-standards
 ```
+
+**Repo de cliente nuevo** (auto-enrolado):
+
+```bash
+cd claude-odoo-standards
+./scripts/init-odoo-project.sh --client=ACME --odoo=19.0 --edition=Community --python=3.12
+```
+
+Genera `../acme-odoo19/` con un `CLAUDE.md` thin (solo `🔒 VERSION LOCK`) y un
+`.claude/settings.json` que enrola el marketplace + plugin. Al abrir `claude` en ese
+repo, el estándar completo se carga desde el plugin.
+
+## Enterprise (enforcement opcional)
+
+`managed/` documenta cómo IT fija el marketplace y `enabledPlugins` vía managed-settings
+(MDM/Jamf/Intune) para enrolamiento no sobrescribible. Ver `docs/plan-rollout.md`.
+
+## Plugins de terceros (Letzdoo)
+
+`marketplace.json` agrega `odoo-development`, `odoo-query` y `odoo-token-killer` para un
+único punto de alta. **Confirma los repos reales** de esos plugins antes de instalarlos.
 
 > Los `rev:`/versiones de pre-commit y los precios de Claude conviene verificarlos
 > contra las fuentes oficiales vigentes antes de adoptarlos.

@@ -6,5 +6,13 @@
       "Read(./vendor/odoo/**)"
     ]
   },
-  "env": { "ODOO_TEST_TAGS": "post_install,-at_install" }
+  "env": { "ODOO_TEST_TAGS": "post_install,-at_install" },
+  "extraKnownMarketplaces": {
+    "claude-odoo-standards": {
+      "source": { "source": "github", "repo": "hidran/claude-odoo-standards" }
+    }
+  },
+  "enabledPlugins": {
+    "odoo-standards@claude-odoo-standards": true
+  }
 }

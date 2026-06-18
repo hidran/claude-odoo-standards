@@ -1,15 +1,16 @@
-# Cliente: {{CLIENT}} — Overlay
+# Cliente: {{CLIENT}}
 
-@import {{STANDARDS_PATH}}/CLAUDE.md
+El estandar de ingenieria de empresa llega via el **plugin `odoo-standards`**
+(marketplace privado). No se copia aqui: las reglas, skills, commands, agents y hooks
+se cargan desde el plugin. Este archivo solo fija lo especifico del cliente.
 
 ## 🔒 VERSION LOCK (no negociable)
 - Odoo **{{ODOO_VERSION}}** {{EDITION}}. Python {{PYTHON}}.
-- Fuente de verdad: `./vendor/odoo` (submódulo, solo lectura, rama {{ODOO_VERSION}}).
-  Si dudas de una API, LÉELA AHÍ. No la recuerdes.
+- Fuente de verdad: `./vendor/odoo` (submodulo, solo lectura, rama {{ODOO_VERSION}}).
+  Si dudas de una API, un tag de vista o un metodo del ORM, **LEELO AHI**. No lo recuerdes.
 - Deploy: {{DEPLOY}}.
 
-## Guardrails activos para {{ODOO_VERSION}}
-Ver `claude-standards/docs/odoo-version-guardrails.md`, columna {{ODOO_VERSION}}.
+> La skill `odoo-version-guardrails` aplica SOLO la columna de Odoo {{ODOO_VERSION}}.
 
 ## Quirks del cliente
-- (localización, módulos custom, integraciones — rellenar)
+- (localizacion, modulos custom, integraciones — rellenar)

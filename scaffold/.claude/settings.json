@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(pre-commit:*)",
-      "Bash(python -m pytest:*)",
-      "Read(./vendor/odoo/**)"
-    ]
-  }
-}

@@ -1,6 +1,8 @@
-# Cliente: ACME — Overlay
+# Cliente: ACME
 
-@import ../claude-standards/CLAUDE.md
+El estándar de empresa llega vía el **plugin `odoo-standards`** del marketplace privado
+(ver `.claude/settings.json`). Las reglas, skills, commands, agents y hooks se cargan
+desde el plugin; este archivo solo fija lo específico de ACME.
 
 ## 🔒 VERSION LOCK (no negociable)
 - Odoo **19.0** Community. Python 3.12.
@@ -9,9 +11,8 @@
 - Deploy: odoo.sh (rama `production`) + infraestructura propia en la nube (staging).
 
 ## Guardrails activos para 19.0
-Referencia completa: `../claude-standards/docs/odoo-version-guardrails.md` (columna 18/19).
-
-Recordatorio de lo que MÁS rompe en este repo:
+La skill `odoo-version-guardrails` aplica la columna 18/19. Recordatorio de lo que MÁS
+rompe en este repo:
 - Vistas de lista: tag raíz **`<list>`** (NO `<tree>`).
 - `view_mode` de las acciones: **`list,form`** (NO `tree,form`).
 - Visibilidad/lectura condicional: atributos **inline** `invisible="..."`, `readonly="..."` (NO `attrs="{...}"`).

@@ -1,70 +1,36 @@
-# Estándar de Ingeniería — [Empresa]
+# claude-odoo-standards — marketplace de la empresa
 
-> Este archivo es el estándar **agnóstico de versión** de la empresa.
-> Los repos de cliente lo importan y añaden encima su `🔒 VERSION LOCK`.
-> Importa la matriz de versiones:
-@docs/odoo-version-guardrails.md
+Este repo es el **marketplace privado** de Claude Code de la empresa. Aloja el plugin
+`odoo-standards`, que distribuye el estándar de ingeniería Odoo (skills, commands,
+agents, hooks) a todos los repos de cliente.
 
-## 0. Regla de oro (Odoo multi-versión)
+> Estás trabajando en la **fuente** del estándar, no en un repo de cliente.
+> La fuente canónica del estándar es `plugins/odoo-standards/`, NO este archivo.
 
-- **NUNCA inventes APIs de Odoo "de memoria".** El modelo mezcla v14, v16 y v18 sin avisar.
-- La **única fuente de verdad** es el código de la versión fijada en el repo (`vendor/odoo` o el MCP de docs declarado en el overlay del cliente). Si dudas de una firma, un tag de vista o un método del ORM, **léelo en el fuente de esa versión**, no lo recuerdes.
-- Antes de escribir, consulta la sección "VERSION LOCK" del `CLAUDE.md` del repo. Si no existe, **detente y pregunta** qué versión de Odoo es.
+## Estructura
 
-## 1. Principios de diseño
+- `.claude-plugin/marketplace.json` — manifiesto del marketplace (nuestro plugin + plugins Letzdoo).
+- `plugins/odoo-standards/` — el plugin:
+  - `skills/odoo-engineering-standard/` — estándar agnóstico (reglas de oro, calidad, seguridad).
+  - `skills/odoo-version-guardrails/` — matriz v14→v19 (fuente única; el VERSION LOCK del cliente selecciona la columna).
+  - `skills/verify-multi-company/` — validación de aislamiento multi-compañía.
+  - `commands/`, `agents/`, `hooks/`.
+- `scaffold/` + `scripts/init-odoo-project.sh` — generador de repos de cliente thin auto-enrolados.
+- `managed/` — docs de la vía de enforcement opcional (managed-settings vía MDM).
+- `docs/` — diseño, rollout y referencia humana.
 
-- SOLID / DRY / KISS, no negociables.
-- Diffs pequeños y revisables. Una tarea = un PR enfocado.
-- Extiende, no reescribas: usa `_inherit` / `_inherits`. Nunca toques módulos del core.
-- Toda decisión arquitectónica relevante va documentada en el PR.
+## Cómo mantenerlo
 
-## 2. Estructura de un módulo Odoo
+- **Edita el estándar en `plugins/odoo-standards/skills/…`.** No dupliques contenido en
+  `docs/` ni en este `CLAUDE.md`: la skill es la única fuente.
+- Sube `version` en `plugins/odoo-standards/.claude-plugin/plugin.json` en cada cambio
+  con impacto; los repos de cliente reciben la actualización al refrescar el plugin.
+- Este repo se prueba a sí mismo: `.claude/settings.json` enrola el plugin vía
+  marketplace `directory` (`path: "."`), así los cambios se ven en vivo aquí.
 
-```
-mi_modulo/
-├── __init__.py
-├── __manifest__.py
-├── models/
-├── views/
-├── security/
-│   └── ir.model.access.csv
-├── data/
-├── wizards/
-├── report/
-├── controllers/
-├── static/
-├── i18n/
-└── tests/
-```
+## Cómo lo consume un repo de cliente
 
-## 3. Calidad (compuertas)
-
-- `pre-commit` obligatorio: `black`, `isort`, `flake8`, `pylint-odoo`.
-- Toda funcionalidad lleva tests: `odoo.tests.common.TransactionCase`, decorados con `@tagged`.
-- Sin `print()`. Logging con `logging.getLogger(__name__)`.
-- Sin secretos en código. Endpoints/keys en config, nunca hardcodeados.
-
-## 4. Seguridad (default-deny)
-
-- Cada modelo nuevo declara `ir.model.access.csv` y, si aplica, `record rules`.
-- Permisos mínimos por grupo. Nada de `perm_unlink=1` salvo a managers.
-- Validar input en controllers. `sudo()` solo justificado y comentado.
-
-## 5. Git
-
-- Ramas `feature/*` desde la rama del cliente (no desde `main` genérico).
-- PR con: descripción, plan, versión Odoo afectada, checklist de tests.
-- Squash merge. Borrar rama tras merge.
-
-## 6. Cómo trabajar una tarea (flujo estándar)
-
-1. **Explorar** — leer el módulo afectado + el fuente de la versión fijada. Sin código aún.
-2. **Planificar** — usar *plan mode* para todo lo que toque modelos/campos/migraciones.
-3. **Implementar** — diff mínimo, respetando `_inherit` y la sintaxis de la versión.
-4. **Verificar** — correr el subagente `odoo-version-auditor` y los tests antes del PR.
-
-## 7. Soporte (tickets sobre sistemas en vivo)
-
-- Reproducir **antes** de tocar: test que falle o pasos de repro documentados.
-- Confirmar la versión del cliente al inicio. Aplicar guardrails de esa versión.
-- Si cambia el esquema → script de migración de datos en `migrations/`.
+1. `init-odoo-project.sh` genera un `CLAUDE.md` thin (solo `🔒 VERSION LOCK`) y un
+   `.claude/settings.json` con `extraKnownMarketplaces` + `enabledPlugins`.
+2. Al abrir `claude` en ese repo, el plugin aporta el estándar completo.
+3. Ejemplo funcionando: `acme-erp-odoo19/` (Odoo 19, módulo `acme_sales`).
