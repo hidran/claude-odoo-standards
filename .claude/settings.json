@@ -20,6 +20,7 @@
     }
   },
   "enabledPlugins": {
-    "odoo-standards@claude-odoo-standards": true
+    "odoo-standards@claude-odoo-standards": true,
+    "odoo-devkit@claude-odoo-standards": true
   }
 }

@@ -91,10 +91,16 @@ mi_modulo/
 
 ## 9. Herramientas y plugins disponibles
 
-Este plugin aporta:
+El plugin `odoo-standards` aporta:
 - **Commands:** `/new-module`, `/migrate-check`, `/fix-ticket`, `/gen-i18n`.
 - **Agents:** `odoo-version-auditor`, `odoo-security-reviewer`, `odoo-enterprise-auditor`.
-- **Skills:** `odoo-version-guardrails`, `verify-multi-company`.
+- **Skills de conocimiento:** `odoo-version-guardrails`, `odoo-orm-patterns`,
+  `odoo-testing`, `odoo-performance`, `odoo-views-qweb`, `odoo-migrations`,
+  `verify-multi-company`.
+
+El plugin hermano `odoo-devkit` aporta andamiaje: `/odoo-model`, `/odoo-field`,
+`/odoo-wizard`, `/odoo-report`, `/odoo-controller`, `/odoo-cron` y el agente
+`odoo-perf-auditor`.
 
 El marketplace de la empresa tambien referencia plugins curados de Letzdoo
 (`odoo-development`, `odoo-query`, `odoo-token-killer`); instalalos desde el mismo

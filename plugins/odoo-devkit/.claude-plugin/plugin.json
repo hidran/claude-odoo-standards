@@ -1,0 +1,10 @@
+{
+  "name": "odoo-devkit",
+  "version": "1.0.0",
+  "description": "Herramientas de andamiaje para desarrollo Odoo: comandos para generar modelos, campos, wizards, reportes, controllers y crons respetando el VERSION LOCK del repo. Complementa al plugin odoo-standards.",
+  "author": {
+    "name": "[Empresa]"
+  },
+  "homepage": "https://github.com/hidran/claude-odoo-standards",
+  "keywords": ["odoo", "scaffolding", "devtools", "productivity"]
+}

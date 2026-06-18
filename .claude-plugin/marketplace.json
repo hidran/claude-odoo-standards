@@ -15,6 +15,11 @@
       "description": "Estandar de ingenieria Odoo agnostico de version (skills, commands, agents, hooks)."
     },
     {
+      "name": "odoo-devkit",
+      "source": "./plugins/odoo-devkit",
+      "description": "Andamiaje Odoo: /odoo-model, /odoo-field, /odoo-wizard, /odoo-report, /odoo-controller, /odoo-cron + agente de rendimiento."
+    },
+    {
       "name": "odoo-development",
       "source": {
         "source": "github",

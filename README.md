@@ -15,16 +15,23 @@ claude-odoo-standards/            # marketplace (este repo)
 > En producción serían **dos repos** en tu organización: `tu-org/claude-odoo-standards`
 > (este) y `tu-org/acme-erp-odoo19`. Aquí van juntos solo para el ejemplo.
 
-## El plugin `odoo-standards`
+## Los plugins
 
-Entrega el estándar de empresa de forma nativa:
+**`odoo-standards`** — el estándar de empresa, de forma nativa:
 
 - **Skills** — `odoo-engineering-standard` (reglas de oro, SOLID/seguridad),
   `odoo-version-guardrails` (matriz v14→v19; aplica solo la columna del VERSION LOCK),
-  `verify-multi-company`.
+  `odoo-orm-patterns`, `odoo-testing`, `odoo-performance`, `odoo-views-qweb`,
+  `odoo-migrations`, `verify-multi-company`.
 - **Commands** — `/new-module`, `/migrate-check`, `/fix-ticket`, `/gen-i18n`.
 - **Agents** — `odoo-version-auditor`, `odoo-security-reviewer`, `odoo-enterprise-auditor`.
 - **Hooks** — guard de secretos (PreToolUse) y lint Odoo (PostToolUse).
+
+**`odoo-devkit`** — andamiaje que aplica las skills anteriores:
+
+- **Commands** — `/odoo-model`, `/odoo-field`, `/odoo-wizard`, `/odoo-report`,
+  `/odoo-controller`, `/odoo-cron`.
+- **Agents** — `odoo-perf-auditor` (anti-patrones N+1/computes/indices).
 
 ## Cómo se usa
 
