@@ -1,5 +1,7 @@
 # Estándar Odoo como plugin de Claude Code (marketplace privado)
 
+> Idiomas: **Español** · [English](README.en.md)
+
 Muestra cómo una consultora Odoo multi-versión centraliza su estándar de ingeniería con
 el modelo nativo de Claude Code: **un plugin versionado servido desde un marketplace
 privado**, en vez de symlinks o `@import`.
